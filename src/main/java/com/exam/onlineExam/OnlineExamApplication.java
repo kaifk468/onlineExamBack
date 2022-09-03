@@ -34,34 +34,35 @@ public class OnlineExamApplication  implements CommandLineRunner{
 		// TODO Auto-generated method stub
 
 		//setting up user data;
-		User user=new User();
-		user.setEmail("kaifk468@gmail.com");
-		user.setEnabled(true);
-		user.setLastName("siiddique");
-		user.setUserName("kaifk468");
-		user.setPhone("87878789809");
+		// User user=new User();
+		// user.setEmail("kaifk468@gmail.com");
+		// user.setEnabled(true);
+		// user.setLastName("siiddique");
+		// user.setUserName("kaifk456468");
+		// user.setPhone("87878789809");
+		// user.setPassword("helloe moto how do uo do");
 
-		// //creating a role for user
-		Role role=new Role(10, "Normal");
-		// //
+		// // //creating a role for user
+		// Role role=new Role(11, "Normal");
+		// // //
 
-		roleRepo.save(role);
-		User_Role user_Role=new User_Role();
-		user_Role.setRoleName(role);
-		user_Role.setUser(user);
+		// roleRepo.save(role);
+		// User_Role user_Role=new User_Role();
+		// user_Role.setRoleName(role);
+		// user_Role.setUser(user);
 
-		// //adding userRole for user
-		Set<User_Role> userRoles=new HashSet<>();
-		userRoles.add(user_Role);
+		// // //adding userRoles for user
+		// Set<User_Role> userRoles=new HashSet<>();
+		// userRoles.add(user_Role);
 
-		 //user.setUserRole(userRoles);
+		// user.getUserRole().addAll(userRoles);
 		
-		 userService.createUser(user, userRoles);
+		//  userService.createUser(user,userRoles);//to seave thie to the datat base
 
-		//user data with user role completed
+		// //user data with user role completed
 		
 
-		System.out.println("commandLineRunner is  running");
+		// System.out.println("commandLineRunner is  running");
 		
 	}
 

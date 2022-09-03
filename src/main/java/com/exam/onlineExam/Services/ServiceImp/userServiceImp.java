@@ -22,12 +22,24 @@ public class userServiceImp implements UserService {
         // TODO Auto-generated method stub
 
 
+        User local=userRepo.findByUserName(user.getUserName());
+        if(local==null)
+        {
+
+            user.getUserRole().addAll(user_Roles);
+            local=userRepo.save(user);
+            System.out.println("user saved to database--------------------");
+        }
+        else
+        System.out.println("user already exist--------------------");
+        return local;
+    }
 
 
-        user.getUserRole().addAll(user_Roles);
-        User  local=userRepo.save(user);
-
-        return null;
+    @Override
+    public User findUserByUserName(String userName) {
+        // TODO Auto-generated method stub
+        return userRepo.findByUserName(userName);
     }
     
 }

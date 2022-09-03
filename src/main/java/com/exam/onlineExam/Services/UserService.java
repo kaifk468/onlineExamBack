@@ -8,5 +8,7 @@ import com.exam.onlineExam.Entities.User_Role;
 public interface UserService {
 
     public User createUser(User user,Set<User_Role> user_Roles);
+
+    public User findUserByUserName(String userName);
     
 }
