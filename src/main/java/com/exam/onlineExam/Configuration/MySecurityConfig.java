@@ -40,34 +40,17 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter{
     JwtAuthenticaionFilter jwtAuthenticaionFilter;
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
-        return NoOpPasswordEncoder.getInstance();
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
-    // @Bean
-    // public DaoAuthenticationProvider authenticationProvider() {
-    // DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-     
-    // authProvider.setUserDetailsService(userDetailsServiceImp);
-    // authProvider.setPasswordEncoder(passwordEncoder());
- 
-    //  return authProvider;  
-    // }
+   
 
     @Override
     @Bean
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
-    // @Bean
-    // public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-    
-    //     http.authorizeRequests().antMatchers("/user/**").hasRole("Normal").
-    //     and().formLogin().loginPage("/login").and().csrf().disable();
-
-    //     http.formLogin().defaultSuccessUrl("/user");
-        
-    //     return http.build();
-    // }
+   
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -82,7 +65,7 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter{
        http.csrf().disable().
                             cors().disable().
                             authorizeRequests().
-                            antMatchers("/generate-token","/user/test").permitAll()
+                            antMatchers("/generate-token","/user/").permitAll()
                             .antMatchers(HttpMethod.OPTIONS).permitAll()
                             .anyRequest().authenticated()
                             .and()
@@ -96,3 +79,25 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter{
     
     
 }
+
+// @Bean
+// public DaoAuthenticationProvider authenticationProvider() {
+// DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+ 
+// authProvider.setUserDetailsService(userDetailsServiceImp);
+// authProvider.setPasswordEncoder(passwordEncoder());
+
+//  return authProvider;  
+// }
+
+
+// @Bean
+// public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+
+//     http.authorizeRequests().antMatchers("/user/**").hasRole("Normal").
+//     and().formLogin().loginPage("/login").and().csrf().disable();
+
+//     http.formLogin().defaultSuccessUrl("/user");
+    
+//     return http.build();
+// }

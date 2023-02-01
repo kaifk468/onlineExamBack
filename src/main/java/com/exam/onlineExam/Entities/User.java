@@ -33,6 +33,7 @@ public class User implements UserDetails{
     private String phone;
     private String password;
 
+    //one user can have many user role
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "user")
     @JsonIgnore
     private Set<User_Role> userRole=new HashSet<>();
@@ -147,6 +148,7 @@ public class User implements UserDetails{
         this.userRole = userRole;
     }
 
+  
 
     @Override
     public String getPassword() {
@@ -158,6 +160,7 @@ public class User implements UserDetails{
         this.password = password;
     }
 
+    //this are the methods of userdetails class from spring security
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

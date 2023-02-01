@@ -5,6 +5,7 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -19,16 +20,17 @@ import com.exam.onlineExam.Entities.User;
 import com.exam.onlineExam.Entities.User_Role;
 import com.exam.onlineExam.Repositories.RoleRepo;
 import com.exam.onlineExam.Services.UserService;
-
+@CrossOrigin
 @RestController
 @RequestMapping("/user")
-@CrossOrigin("*")
 public class UserController {
     
    @Autowired
    UserService userService;
    @Autowired
    RoleRepo roleRepo;
+   @Autowired
+   BCryptPasswordEncoder passEncoder;
 
    // used to add new user to the database
    @GetMapping("/test")
@@ -36,12 +38,18 @@ public class UserController {
    {
     return "this is testing";
    }
+   //create new users
     @PostMapping("/")
     public User createUser(@RequestBody User user) throws Exception
     {
+    	System.out.print("tyring to create user");
         user.setProfilePic("default.png");
         Role role=new Role(11, "Normal");//creating a role for new user
 		roleRepo.save(role);//saving that role to db
+		
+		
+		//encoding passwd with bcryp
+		user.setPassword(passEncoder.encode(user.getPassword()));
 
         
 		User_Role user_Role=new User_Role();//creating  set of user_roles 
@@ -51,7 +59,7 @@ public class UserController {
 		Set<User_Role> userRoles=new HashSet<>();
 		userRoles.add(user_Role);//adding all user_roles to the set for the user
 
-
+		
 		user.getUserRole().addAll(userRoles);//adding the set to users
         User createdUser=userService.createUser(user,userRoles);//saving user to the db
         return createdUser;

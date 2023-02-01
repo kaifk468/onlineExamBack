@@ -1,7 +1,7 @@
 package com.exam.onlineExam.Entities;
 
 public class JwtRequest {
-    private String userName;
+    private String username;
     private String password;
 
     
@@ -10,12 +10,12 @@ public class JwtRequest {
 
 
     public String getUsername() {
-        return userName;
+        return username;
     }
 
 
     public void setUsername(String username) {
-        this.userName = username;
+        this.username = username;
     }
 
 

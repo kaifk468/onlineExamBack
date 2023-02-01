@@ -1,5 +1,7 @@
 package com.exam.onlineExam.Controllers;
 
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -8,6 +10,8 @@ import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,10 +19,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.exam.onlineExam.Configuration.JwtUtils;
 import com.exam.onlineExam.Entities.JwtRequest;
 import com.exam.onlineExam.Entities.JwtResposne;
+import com.exam.onlineExam.Entities.User;
 import com.exam.onlineExam.Services.ServiceImp.UserDetailsServiceImp;
 import com.exam.onlineExam.Services.ServiceImp.userServiceImp;
 
 @RestController
+@CrossOrigin
 public class AuthController {
     
     @Autowired
@@ -33,7 +39,7 @@ public class AuthController {
     @PostMapping("/generate-token")
     public ResponseEntity<?> generateToken(@RequestBody JwtRequest jwtRequest) throws Exception
     {
-        System.out.println(jwtRequest.getUsername()+" "+jwtRequest.getPassword());
+        //System.out.println(jwtRequest.getUsername()+" "+jwtRequest.getPassword());
         try{
             authenticate(jwtRequest.getUsername(), jwtRequest.getPassword());
         }
@@ -45,6 +51,12 @@ public class AuthController {
         UserDetails userDetails=userDetailsServiceImp.loadUserByUsername(jwtRequest.getUsername());
         String token =jwtUtils.generateToken(userDetails);
         return ResponseEntity.ok(new JwtResposne(token));
+    }
+    //get the details of current logged In user
+    @GetMapping("/current-user")
+    public User currentUser(Principal principal)
+    {
+    	return ((User)userDetailsServiceImp.loadUserByUsername(principal.getName()));
     }
 
     private void authenticate(String username ,String password) throws Exception
