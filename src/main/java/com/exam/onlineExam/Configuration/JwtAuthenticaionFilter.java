@@ -66,7 +66,7 @@ public class JwtAuthenticaionFilter  extends OncePerRequestFilter{
         {
             System.out.println("token is not valid kaif");
         }
-        filterChain.doFilter(request, response);
+        filterChain.doFilter(request,response);
      
     }
     

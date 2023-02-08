@@ -32,7 +32,7 @@ public class UserController {
    @Autowired
    BCryptPasswordEncoder passEncoder;
 
-   // used to add new user to the database
+  // used to add new user to the database
    @GetMapping("/test")
    public String test()
    {

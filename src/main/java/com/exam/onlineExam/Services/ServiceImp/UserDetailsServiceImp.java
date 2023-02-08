@@ -10,6 +10,7 @@ import com.exam.onlineExam.Entities.User;
 import com.exam.onlineExam.Repositories.UserRepo;
 import com.exam.onlineExam.Services.UserService;
 
+//this sevice class is used by Spring Security for lodin the user from database;
 @Service
 public class UserDetailsServiceImp implements UserDetailsService {
 

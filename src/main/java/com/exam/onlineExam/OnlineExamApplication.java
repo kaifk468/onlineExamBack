@@ -1,17 +1,15 @@
 package com.exam.onlineExam;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.exam.onlineExam.Entities.Role;
-import com.exam.onlineExam.Entities.User;
-import com.exam.onlineExam.Entities.User_Role;
+import com.exam.onlineExam.Entities.Quizess.Quiz;
 import com.exam.onlineExam.Repositories.RoleRepo;
+import com.exam.onlineExam.Repositories.Quizess.CategoryRepo;
+import com.exam.onlineExam.Repositories.Quizess.QuizeRepo;
+import com.exam.onlineExam.Services.CategoryService;
 import com.exam.onlineExam.Services.UserService;
 
 @SpringBootApplication
@@ -22,6 +20,12 @@ public class OnlineExamApplication  implements CommandLineRunner{
 
 	@Autowired
 	RoleRepo roleRepo;
+	
+	@Autowired
+	QuizeRepo quizeRepo;
+	
+	@Autowired
+	CategoryRepo categoryRepo;
 	public static void main(String[] args) {
 		SpringApplication.run(OnlineExamApplication.class, args);
 		System.out.println("system is running smothely -------------------------------------");
@@ -32,7 +36,11 @@ public class OnlineExamApplication  implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
-
+        Quiz q=new Quiz();
+        q.setId(59);
+        //categoryRepo.deleteById(49L);
+        //quizeRepo.deletee(67L);;
+       // System.out.print("deleted");
 		//setting up user data;
 		// User user=new User();
 		// user.setEmail("kaifk468@gmail.com");
