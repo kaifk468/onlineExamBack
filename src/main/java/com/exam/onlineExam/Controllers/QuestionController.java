@@ -36,8 +36,8 @@ public class QuestionController {
 	{
 		return ResponseEntity.ok(questionService.addQuestion(question));
 	}
-//  get question by Id
-	@RequestMapping("/{QuestionId}")
+    //get question by Id
+	@RequestMapping("/{questionId}")
 	public ResponseEntity<Question> getQuestion(@PathVariable long questionId)
 	{
 		return ResponseEntity.ok(questionService.getQuestion(questionId));

@@ -33,15 +33,9 @@ public class Quiz {
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Category category;
 	
-	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy="quiz")
+	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy="quiz")
 	@JsonIgnore
 	private Set<Question> questions=new LinkedHashSet<>();
-	
-	
-	
-	
-
-
 
 	public Quiz(String title, String description, double maxMark, long noOfQuestion, Category catagory) {
 		super();
@@ -52,31 +46,17 @@ public class Quiz {
 		this.category = catagory;
 	}
 
-
-
-   
 	public boolean isActive() {
 		return active;
 	}
-
-
-
 
 	public void setActive(boolean active) {
 		this.active = active;
 	}
 
-
-
-
 	public Quiz() {
 		super();
 	}
-
-
-
-
-
 
 	public long getId() {
 		return id;

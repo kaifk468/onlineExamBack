@@ -1,5 +1,6 @@
 package com.exam.onlineExam.Services;
 
+import java.util.List;
 import java.util.Set;
 import com.exam.onlineExam.Entities.Quizess.Quiz;
 
@@ -16,4 +17,8 @@ public interface QuizService {
 	public Quiz getQuiz(long catId);
 	
 	public Quiz deleteQuiz(long quiz);
+	
+	public List<Quiz> getQuizByCategory(boolean active,long categoryId);
+	
+	public List<Quiz> getAllActiveQuiz();
 }

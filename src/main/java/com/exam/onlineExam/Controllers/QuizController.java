@@ -35,12 +35,25 @@ public class QuizController {
 	{
 		return ResponseEntity.ok(quizService.getQuiz(quizId));
 	}
-	//get all quiz 
+	//get all quiz both actic and unactive useful for admin
 	@GetMapping("/")
 	public ResponseEntity<?> getAllQuiz()
 	{
 		return ResponseEntity.ok(quizService.getAllQuiz());
 	}
+	//get all quiz os specific category
+	@GetMapping("/category/{categoryId}")
+	public ResponseEntity<?> getQuizByCategory(@PathVariable long categoryId)
+	{
+		return ResponseEntity.ok(quizService.getQuizByCategory(true,categoryId));
+	}
+	//get all active quiz only useful for user
+	@GetMapping("/active")
+	public ResponseEntity<?> getAllActiveQuiz()
+	{
+		return ResponseEntity.ok(quizService.getAllActiveQuiz());
+	}
+	
 	//updtae quiz make sure to give same id that u want to update
 	@PutMapping("/")
 	public ResponseEntity<?> updateQuiz(@RequestBody Quiz quiz)
