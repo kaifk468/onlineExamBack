@@ -1,0 +1,22 @@
+services:
+  db:
+    ports:
+      - 5432:5432
+    container_name: postgresql_container
+    image: postgres
+    environment:
+      - POSTGRES_DB=onlineexam
+      - POSTGRES_USERNAME=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - C:\Users\shivamjais\Desktop\postgresDataBase:/var/lib/postgresql/data
+    restart: always
+  backend:
+    build: .
+    ports:
+      - 8080:8080
+    container_name: online_backend_container
+    depends_on:
+      - db
+    restart: always
+
