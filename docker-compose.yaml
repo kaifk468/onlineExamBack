@@ -1,9 +1,9 @@
 #Before running this compose file make sure download both frontEnd and backEnd images from dokerhub
-#==> BackEnd img : docker push kaifk468/online-exam-back
-#==> FrontEnd img : docker push kaifk468/online-exam-front
+#==> BackEnd img : docker pull kaifk468/online-exam-back
+#==> FrontEnd img : docker pull kaifk468/online-exam-front
 services:
   postgres:
-    container_name: postgres-con
+    container_name: DatatBase-Cont
     image: postgres:alpine3.18
     ports:
       - "5432:5432"
@@ -18,8 +18,8 @@ services:
       - mynetwork
 
   spring-app:
-    container_name: backend-con
-    image: exam-backend-img
+    container_name: BackEnd-Cont
+    image: kaifk468/online-exam-back
     ports:
       - "8080:8080"
     depends_on:
@@ -27,14 +27,14 @@ services:
     networks:
       - mynetwork
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5435/onlineexam
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/onlineexam
       SPRING_DATASOURCE_USERNAME: postgres
-      SPRING_DATASOURCE_PASSWORD: root
+      SPRING_DATASOURCE_PASSWORD: postgres
     restart: always
 
   angular-app:
-    container_name: fronend-con
-    image: online-examfront-img
+    container_name: UI-Cont
+    image: kaifk468/online-exam-front
     ports:
       - "4200:4200"
     depends_on:
@@ -45,29 +45,4 @@ services:
 
 networks:
   mynetwork:
-
-
-###############################################################################################
-
-#services:
-#  db:
-#    ports:
-#      - 5432:5432
-#    container_name: postgresql_container
-#    image: postgres
-#    environment:
-#      - POSTGRES_DB=onlineexam
-#      - POSTGRES_USERNAME=postgres
-#      - POSTGRES_PASSWORD=root
-#    volumes:
-#      - C:\Users\shivamjais\Desktop\postgresDataBase:/var/lib/postgresql/data
-#    restart: always
-#  backend:
-#    build: .
-#    ports:
-#      - 8080:8080
-#    container_name: online_backend_container
-#    depends_on:
-#      - db
-#    restart: always
 
