@@ -33,6 +33,10 @@ The project requires JDK 11.
     ```
     $ mvn clean install 
     ```
+2. Pull the Docker image:
+   ```
+   docker pull kaifk468/online-exam-back:latest
+   ```
 
 ## Future Features
 * Feedback System: Allow users to provide feedback on specific questions or exams, helping admins review and update questions based on user feedback.
